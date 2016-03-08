@@ -105,7 +105,7 @@
     (underline . org-twbs-underline)
     (verbatim . org-twbs-verbatim)
     (verse-block . org-twbs-verse-block))
-  :export-block "HTML"
+  ;; :export-block "HTML"
   :filters-alist '((:filter-final-output . org-twbs-final-function))
   :menu-entry
   '(?w "Export to TWBS HTML"
