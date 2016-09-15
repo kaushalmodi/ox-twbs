@@ -2256,9 +2256,12 @@ http://orgmode.org/w/?p=org-mode.git;a=commit;h=8daf4a89f1a157c0ee2c91e5b9902036
 Call 7-arity first, then 6-arity if first fails."
   (with-no-warnings
     (condition-case nil
-        (org-format-latex prefix dir overlays msg at forbuffer processing-type)
+        (org-format-latex prefix nil nil dir overlays msg forbuffer processing-type)
       (error
-       (org-format-latex prefix dir overlays msg forbuffer processing-type)))))
+       (condition-case nil
+           (org-format-latex prefix dir overlays msg at forbuffer processing-type)
+         (error
+          (org-format-latex prefix dir overlays msg forbuffer processing-type)))))))
 
 (defun org-twbs-format-latex (latex-frag processing-type info)
   "Format a LaTeX fragment LATEX-FRAG into HTML.
@@ -2885,7 +2888,7 @@ channel."
           (if (not org-twbs-table-align-individual-fields) ""
             (format (if (and (boundp 'org-twbs-format-table-no-css)
                              org-twbs-format-table-no-css)
-                        " align=\"%s\"" " class=\"%s\"")
+                        " align=\"%s\"" " class=\"text-%s\"")
                     (org-export-table-cell-alignment table-cell info)))))
     (when (or (not contents) (string= "" (org-trim contents)))
       (setq contents "&#xa0;"))
