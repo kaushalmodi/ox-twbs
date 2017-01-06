@@ -106,7 +106,8 @@
     (verbatim . org-twbs-verbatim)
     (verse-block . org-twbs-verse-block))
   ;; :export-block "HTML"
-  :filters-alist '((:filter-final-output . org-twbs-final-function))
+  :filters-alist '((:filter-final-output . org-twbs-final-function)
+                   (:filter-parse-tree . org-html-image-link-filter))
   :menu-entry
   '(?w "Export to TWBS HTML"
        ((?H "As HTML buffer" org-twbs-export-as-html)
